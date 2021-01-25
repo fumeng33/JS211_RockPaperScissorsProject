@@ -13,29 +13,29 @@ const rl = readline.createInterface({
 
 // the function that will be called by the unit test below
 const rockPaperScissors = (hand1, hand2) => {
-//write modify 
+  //write modify 
   hand1 = hand1.trim().toLowerCase();
   hand2 = hand2.trim().toLowerCase();
   // code to pass a condition 
-  if (hand1 === hand2){
+  if (hand1 === hand2) {
     return "It's a tie!"
   }
   if (hand1 === "rock" && hand2 === "paper") {
     return "Hand two wins!"
   }
-  if (hand1 === "rock" && hand2 === "scissors"){
+  if (hand1 === "rock" && hand2 === "scissors") {
     return "Hand one wins!"
   }
   if (hand1 === "scissors" && hand2 === "paper") {
     return "Hand one wins!"
   }
-  if (hand1 === "scissors" && hand2 === "rock"){
+  if (hand1 === "scissors" && hand2 === "rock") {
     return "Hand two wins!"
   }
   if (hand1 === "paper" && hand2 === "rock") {
     return "Hand one wins!"
   }
-  if (hand1 === "paper" && hand2 === "scissors"){
+  if (hand1 === "paper" && hand2 === "scissors") {
     return "Hand two wins!"
   }
 }
@@ -52,7 +52,7 @@ const rockPaperScissors = (hand1, hand2) => {
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      console.log( rockPaperScissors(answer1, answer2) );
+      console.log(rockPaperScissors(answer1, answer2));
       getPrompt();
     });
   });
@@ -81,6 +81,40 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
   });
+
+
+  describe(`RPS Unit Test Assignment`, function () {
+    it(`should handle bad input`, function () {
+      let actual = rockPaperScissors(`Boot`, `Roach`);
+      let expected = `Boot`;
+      assert.equal(actual, expected);
+    })
+
+    it(`Should Handle Vulgar Language`, function () {
+      let actual = rockPaperScissors("private parts", "other private parts");
+      let expected = "No bad language please";
+      assert.equal(actual, expected);
+    })
+
+    it('should handle types of element', function () {
+      let actual = rockPaperScissors("diamond", "hollywood");
+      let expected = "Invalid input";
+      assert.equal(actual, expected);
+    })
+
+    it('should handle numbers', function () {
+      let actual = rockPaperScissors("3", "1");
+      let expected = "Please use words, not numbers";
+      assert.equal(actual, expected);
+    })
+
+    it('should handle incorrect spelling', function () {
+      let actual = rockPaperScissors("pape", "rok");
+      let expected = "Please check your spelling:)";
+      assert.equal(actual, expected);
+    })
+  })
+
 } else {
 
   // always returns ask the user for another input
